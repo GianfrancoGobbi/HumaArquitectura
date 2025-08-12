@@ -22,6 +22,10 @@ interface AdminPanelProps {
 
 type AdminView = 'login' | 'list' | 'form';
 
+// Define a type for the payload to ensure compatibility with Supabase types
+// and help manage complex properties like JSON fields.
+type ProyectosUpdatePayload = Database['public']['Tables']['Proyectos']['Update'];
+
 const AdminPanel: React.FC<AdminPanelProps> = ({ supabaseClient, onDataMutated, onBackToApp }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loginUsername, setLoginUsername] = useState('');
@@ -168,28 +172,29 @@ const AdminPanel: React.FC<AdminPanelProps> = ({ supabaseClient, onDataMutated, 
     setFormError(null);
     setFormSuccessMessage(null);
 
-    // By letting TypeScript infer the payload's type, we avoid a bug where
-    // explicitly annotating with a complex recursive type like Supabase's 'Json'
-    // can cause a "Type instantiation is excessively deep" error. The inferred
-    // type is compatible with the 'Insert' and 'Update' types.
-    const payload = {
+    // To prevent a TypeScript error ("Type instantiation is excessively deep")
+    // that can occur with Supabase's recursive 'Json' type, we explicitly
+    // type the payload. The 'media' property, which is an array of objects,
+    // is cast to 'any' to break the deep type-checking cycle.
+    // This approach is more stable than relying on type inference alone.
+    const payload: ProyectosUpdatePayload = {
       nombre: projectData.name,
       map_description: projectData.description,
       descripcion: projectData.details,
       coordinates: projectData.coordinates,
-      media: projectData.media,
+      media: projectData.media as any,
     };
 
     try {
       let responseError = null;
       if (originalId) { // Editing existing project
-        // The `update` method accepts a payload that matches the `Update` type.
         const { error } = await supabaseClient
           .from('Proyectos')
           .update(payload)
           .eq('id', originalId);
         responseError = error;
       } else { // Adding new project
+        // The payload is also compatible with the `Insert` type since `nombre` is required and present.
         const { error } = await supabaseClient
           .from('Proyectos')
           .insert([payload]);
