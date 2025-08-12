@@ -1,0 +1,240 @@
+:root {
+  --chatbot-user-msg-bg: #e0f7fa; /* Light cyan */
+  --chatbot-bot-msg-bg: #f1f3f4;  /* Light gray */
+  --chatbot-border-color: #e0e0e0;
+  --chatbot-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.project-chatbot-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--secondary-blue);
+  color: var(--text-color-light);
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--chatbot-shadow);
+  z-index: 1050; /* Higher than WhatsApp potentially, or manage if both are present */
+  transition: transform 0.2s ease-out, background-color 0.2s ease;
+}
+
+.project-chatbot-fab:hover {
+  transform: scale(1.1);
+  background-color: #0095c7; /* Darken of secondary-blue */
+}
+
+.project-chatbot-fab svg {
+  width: 28px; /* Adjust icon size */
+  height: 28px;
+}
+
+
+.project-chatbot-window {
+  position: fixed;
+  bottom: 100px; /* Above the FAB */
+  right: 30px;
+  width: 350px;
+  max-width: 90vw;
+  height: 450px;
+  max-height: 70vh;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--chatbot-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1040;
+  border: 1px solid var(--chatbot-border-color);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-chatbot-header {
+  background-color: var(--secondary-blue);
+  color: var(--text-color-light);
+  padding: 12px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.project-chatbot-header h2 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.project-chatbot-header button {
+  background: none;
+  border: none;
+  color: var(--text-color-light);
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-chatbot-header button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.project-chatbot-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #f9f9f9; /* Slightly different bg for message area */
+}
+
+.message-bubble {
+  padding: 10px 15px;
+  border-radius: 18px;
+  max-width: 80%;
+  word-wrap: break-word;
+  line-height: 1.5;
+}
+
+.message-bubble p {
+  margin: 0;
+  font-size: 0.95em;
+}
+
+.message-bubble.user {
+  background-color: var(--chatbot-user-msg-bg);
+  color: var(--text-color-dark);
+  align-self: flex-end;
+  border-bottom-right-radius: 5px;
+}
+
+.message-bubble.bot {
+  background-color: var(--chatbot-bot-msg-bg);
+  color: var(--text-color-dark);
+  align-self: flex-start;
+  border-bottom-left-radius: 5px;
+}
+
+/* Style for WhatsApp link inside a bot message */
+.message-bubble.bot .chatbot-whatsapp-link {
+  color: var(--secondary-blue);
+  text-decoration: underline;
+  font-weight: 600; /* Make it stand out a bit */
+}
+.message-bubble.bot .chatbot-whatsapp-link:hover {
+  color: #0095c7; /* Darker shade of secondary-blue */
+}
+
+
+.project-chatbot-input-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid var(--chatbot-border-color);
+  background-color: var(--card-bg);
+  flex-shrink: 0;
+}
+
+.project-chatbot-input-form input[type="text"] {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid var(--chatbot-border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.95em;
+  margin-right: 8px;
+  transition: border-color 0.2s ease;
+}
+.project-chatbot-input-form input[type="text"]:focus {
+  outline: none;
+  border-color: var(--secondary-blue);
+}
+
+.project-chatbot-input-form button {
+  background-color: var(--secondary-blue);
+  color: var(--text-color-light);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 0 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+.project-chatbot-input-form button:hover:not(:disabled) {
+  background-color: #0095c7; /* Darken of secondary-blue */
+}
+.project-chatbot-input-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.project-chatbot-input-form button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.project-chatbot-error {
+  padding: 8px 15px;
+  color: var(--error-color);
+  font-size: 0.85em;
+  text-align: center;
+  background-color: #ffebee; /* Light red background for error */
+  border-bottom: 1px solid var(--chatbot-border-color);
+}
+
+/* Loading dots animation */
+.loading-dots span {
+  animation-name: blink;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  font-size: 1.2em;
+}
+.loading-dots span:nth-child(2) {
+  animation-delay: .2s;
+}
+.loading-dots span:nth-child(3) {
+  animation-delay: .4s;
+}
+
+@keyframes blink {
+  0% { opacity: .2; }
+  20% { opacity: 1; }
+  100% { opacity: .2; }
+}
+
+
+@media (max-width: 480px) {
+  .project-chatbot-window {
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: calc(100% - 70px); /* Full width, height adjusted for FAB if still visible */
+    max-height: none;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .project-chatbot-fab {
+    bottom: 15px;
+    right: 15px;
+    width: 50px;
+    height: 50px;
+  }
+   .project-chatbot-fab svg {
+    width: 24px;
+    height: 24px;
+  }
+}

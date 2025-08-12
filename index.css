@@ -1,0 +1,228 @@
+/* General body and root setup */
+:root {
+  --primary-dark-blue: #22252A; /* Charcoal from logo */
+  --secondary-blue: #00AEEF; /* Cyan from logo's A */
+  --primary-gray: #6c757d;   /* Bootstrap-like medium gray for text */
+  --light-gray-bg: #f8f9fa; /* Bootstrap's light gray bg */
+  --card-bg: #ffffff;
+  --text-color-dark: #343a40; /* Bootstrap's dark gray for text */
+  --text-color-light: #ffffff;
+  --border-radius: 4px; /* Sharper corners */
+  --carousel-arrow-bg: rgba(34, 37, 42, 0.7); /* Use primary dark blue with alpha */
+  --carousel-arrow-color: white;
+  --whatsapp-green: #25D366;
+  --section-padding: 50px 20px; /* Increased padding */
+  --max-content-width: 1100px;
+  --success-color: #28a745; /* Bootstrap success green */
+  --error-color: #dc3545;   /* Bootstrap danger red */
+  --accent-orange: #F58220; /* Orange from VENTAS box */
+  --ai-button-bg: #6f42c1; /* Bootstrap-like purple for AI */
+  --edit-button-bg: var(--accent-orange);
+  --edit-button-hover-bg: #e07010;
+  --delete-button-bg: var(--error-color);
+  --delete-button-hover-bg: #c82333;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--light-gray-bg);
+  color: var(--text-color-dark);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Leaflet popup customization */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  background-color: var(--card-bg);
+}
+
+.leaflet-popup-content {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 18px !important;
+  color: var(--text-color-dark);
+}
+
+.popup-content-container h3 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: var(--primary-dark-blue);
+  font-weight: 600;
+}
+
+.popup-content-container p {
+  margin: 0 0 15px 0;
+  color: var(--primary-gray);
+}
+
+.leaflet-popup-tip {
+  background-color: var(--card-bg);
+}
+
+.view-project-button {
+  background-color: var(--secondary-blue);
+  color: var(--text-color-light);
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+.view-project-button:hover {
+  background-color: #0095c7; /* Darker cyan */
+  transform: translateY(-1px);
+}
+.view-project-button:active {
+  transform: translateY(0px);
+}
+
+.leaflet-control-zoom a {
+  color: var(--primary-dark-blue) !important;
+  border-radius: var(--border-radius) !important;
+  border: 1px solid #bdc3c7 !important;
+  background-color: var(--card-bg) !important;
+}
+.leaflet-control-zoom a:hover {
+  background-color: #f8f9f9 !important;
+}
+
+.leaflet-control-attribution {
+  font-size: 11px;
+  background: rgba(255,255,255,0.85) !important;
+  padding: 4px 8px !important;
+  border-radius: 3px;
+}
+
+.leaflet-control-attribution a {
+  color: var(--primary-dark-blue) !important;
+}
+
+/* Base class for content views like ProjectDetail, AdminPanel sections, ProjectForm */
+.content-view-card {
+  padding: 30px;
+  background-color: var(--card-bg);
+  text-align: left; /* Default, can be overridden */
+  max-width: var(--max-content-width);
+  margin: 30px auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border-radius: var(--border-radius);
+}
+
+.content-view-card > h2, 
+.content-view-card > .admin-panel-header > h2 { /* General H2 styling within content cards */
+  color: var(--primary-dark-blue);
+  font-size: 2em;
+  margin-top: 0;
+  margin-bottom: 25px;
+  /* text-align needs to be component-specific */
+}
+
+
+/* Generic Admin/Action Button Styles */
+.admin-button {
+  padding: 12px 25px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.1s ease, border-color 0.2s ease;
+  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-button.primary {
+  background-color: var(--secondary-blue);
+  color: var(--text-color-light);
+}
+.admin-button.primary:hover {
+  background-color: #0095c7;
+  transform: translateY(-1px);
+}
+
+.admin-button.secondary {
+  background-color: var(--primary-gray);
+  color: var(--text-color-light);
+}
+.admin-button.secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* Global Admin Messages */
+.admin-message {
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+  font-size: 0.95em;
+  text-align: center;
+}
+.admin-message.success-message {
+  background-color: var(--success-color);
+  color: var(--text-color-light);
+  border: 1px solid #28a745;
+}
+.admin-message.error-message {
+  background-color: var(--error-color);
+  color: var(--text-color-light);
+  border: 1px solid #dc3545;
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsive adjustments for styles in index.css */
+@media (max-width: 768px) {
+  .content-view-card {
+    padding: 25px;
+    margin: 20px 15px;
+  }
+  .content-view-card > h2, 
+  .content-view-card > .admin-panel-header > h2 { 
+    font-size: 1.7em; 
+  }
+  .leaflet-popup-content { font-size: 14px; margin: 15px !important; }
+  .popup-content-container h3 { font-size: 17px; }
+  .view-project-button { padding: 9px 16px; font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  .content-view-card {
+    margin: 15px 10px;
+    padding: 20px;
+  }
+   .content-view-card > h2,
+   .content-view-card > .admin-panel-header > h2 { 
+    font-size: 1.5em; 
+  }
+}

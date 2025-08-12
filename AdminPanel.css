@@ -1,0 +1,138 @@
+/* Admin Panel Specific Styles */
+.admin-login-view > h2 {
+  text-align: center;
+}
+.admin-login-view p { /* Specific paragraph styling for login intro text */
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+  color: var(--primary-gray);
+}
+
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px; /* This is for the header itself, not the h2 inside */
+}
+.admin-list-view > .admin-panel-header > h2 { /* h2 inside admin-list-view's header */
+    margin-bottom: 0; 
+    text-align: left; 
+}
+
+.admin-button.logout-button {
+    /* Uses .admin-button.secondary from index.css */
+    /* Add specific margins if needed, but it's flexed in header */
+    margin: 0; /* Reset margin if it had any from a more generic button rule */
+}
+
+.admin-button.add-new-project-button {
+    /* Uses .admin-button.primary from index.css */
+    margin-bottom: 20px !important; /* Ensure this margin applies */
+    display: inline-block; /* Ensure it behaves as expected */
+}
+
+.admin-button.edit-button {
+    background-color: var(--edit-button-bg);
+    color: var(--text-color-light);
+    padding: 8px 15px; 
+    font-size: 0.9em;
+}
+.admin-button.edit-button:hover {
+    background-color: var(--edit-button-hover-bg);
+    transform: translateY(-1px); /* Already in .admin-button, but can be reinforced */
+}
+
+/* Admin Projects Table */
+.admin-projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 0.9em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.admin-projects-table th, .admin-projects-table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: middle;
+}
+.admin-projects-table th {
+    background-color: #e9ecef;
+    color: var(--text-color-dark);
+    font-weight: 600;
+}
+.admin-projects-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+.admin-projects-table tbody tr:hover {
+    background-color: #f1f3f5;
+}
+.admin-projects-table td:last-child { 
+    text-align: center;
+}
+.admin-projects-table .admin-button { /* Buttons inside table cells */
+    margin: 2px;
+}
+
+/* Login Form Specifics (if any, beyond ProjectForm.css if .admin-form is shared) */
+/* .admin-login-view .admin-form .form-group { ... } */
+/* .admin-login-view .admin-form-actions { ... } */
+/* For now, assuming .admin-form styles in ProjectForm.css are sufficient */
+
+
+/* Responsive adjustments for AdminPanel */
+@media (max-width: 768px) {
+  .admin-panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .admin-panel-header .logout-button {
+      margin-top: 10px;
+      width: auto; /* Don't make logout button full width in header */
+      align-self: flex-start;
+  }
+  .admin-projects-table { font-size: 0.85em; }
+  .admin-projects-table th, .admin-projects-table td { padding: 8px; }
+  .admin-projects-table .admin-button { padding: 6px 10px; font-size: 0.8em;}
+}
+
+@media (max-width: 480px) {
+  .admin-projects-table {
+    display: block; /* Force table to not be like a table anymore */
+    width: 100%;
+  }
+  .admin-projects-table thead, .admin-projects-table tbody, .admin-projects-table th, .admin-projects-table td, .admin-projects-table tr {
+    display: block; /* Make table elements behave like divs */
+  }
+  .admin-projects-table thead tr { /* Hide table headers */
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .admin-projects-table tr { border: 1px solid #ccc; margin-bottom: 10px; }
+  .admin-projects-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%; /* Space for data label */
+    text-align: right; /* Align text to right for values */
+  }
+  .admin-projects-table td::before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align: left; /* Align labels to left */
+    font-weight: bold;
+  }
+  /* Data Labels for table cells */
+  .admin-projects-table td:nth-of-type(1)::before { content: "ID"; }
+  .admin-projects-table td:nth-of-type(2)::before { content: "Nombre"; }
+  .admin-projects-table td:nth-of-type(3)::before { content: "Desc. Corta"; }
+  .admin-projects-table td:nth-of-type(4)::before { content: "Acciones"; }
+  .admin-projects-table td:last-child { text-align: center; padding-left: 0; } /* Center actions */
+  .admin-projects-table td:last-child::before { display: none; } /* No label for actions */
+}

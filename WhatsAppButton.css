@@ -1,0 +1,59 @@
+/* WhatsApp Floating Action Button (FAB) */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: var(--whatsapp-green);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+.whatsapp-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+.whatsapp-fab svg {
+  width: 32px;
+  height: 32px;
+  fill: white;
+}
+
+/* Styles for the inline WhatsApp button */
+/* This class is intended to be used alongside 'admin-button' */
+.whatsapp-inline-button {
+  background-color: var(--whatsapp-green) !important; /* Important to override admin-button potentially */
+  color: white !important; /* Ensure text and SVG icon are white */
+  /* Inherits padding, border-radius, font-size, display: inline-flex, etc. from .admin-button */
+}
+
+.whatsapp-inline-button:hover {
+  background-color: #1DAA54 !important; /* Darker green, needs !important if admin-button has specific hover */
+  /* transform: translateY(-1px); Inherited from .admin-button */
+}
+
+.whatsapp-inline-button svg {
+  width: 20px; /* Adjusted size for inline button */
+  height: 20px;
+  /* fill: white; is handled by inline style on SVG component */
+  /* vertical-align: middle; or similar is handled by flex alignment from .admin-button */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .whatsapp-fab { width: 55px; height: 55px; bottom: 20px; right: 20px; }
+  .whatsapp-fab svg { width: 28px; height: 28px; }
+}
+
+@media (max-width: 480px) {
+  .whatsapp-fab { width: 50px; height: 50px; }
+  .whatsapp-fab svg { width: 24px; height: 24px; }
+}

@@ -1,0 +1,146 @@
+.project-detail-view > h2 {
+  text-align: center;
+}
+
+.project-detail-view p {
+  line-height: 1.75;
+  margin-bottom: 20px;
+  color: var(--text-color-dark);
+  font-size: 1.05em;
+}
+
+/* Button actions wrapper */
+.project-detail-actions {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center;    /* Center buttons horizontally */
+  gap: 15px;              /* Space between stacked buttons */
+  margin-top: 35px;
+  margin-bottom: 20px; /* Space after buttons before chatbot */
+}
+
+/*
+  The .back-to-map-button will now use .admin-button and .secondary for its base styling.
+  We can ensure it has a good width and centered text if not already handled by admin-button.
+  .admin-button by default is inline-flex. If we want it full-width of a certain min-width,
+  it should be handled here or by its container (.project-detail-actions aligning items).
+*/
+.project-detail-actions .back-to-map-button,
+.project-detail-actions .whatsapp-inline-button {
+  min-width: 240px; /* Provide a good, consistent minimum width for these action buttons */
+  justify-content: center; /* Center content (icon and text) if using inline-flex from admin-button */
+}
+
+/* Original back-to-map-button styles - now mostly handled by .admin-button.secondary */
+/* We can remove this if .admin-button.secondary from index.css is sufficient */
+.back-to-map-button {
+  /* background-color: var(--secondary-blue);
+  color: var(--text-color-light);
+  border: none;
+  padding: 12px 28px; // Handled by admin-button
+  border-radius: var(--border-radius); // Handled by admin-button
+  cursor: pointer; // Handled by admin-button
+  font-size: 1.05em; // Can be specific
+  font-weight: 500; // Handled by admin-button
+  transition: background-color 0.2s ease, transform 0.1s ease; // Handled by admin-button
+  display: block;  // Overridden by admin-button's inline-flex, but parent flex centers it
+  margin: 0; // Removed specific margins, handled by gap in flex container
+  min-width: 200px; // Set in .project-detail-actions rules above
+  text-align: center; // Useful for block, but admin-button flex centers content */
+}
+
+/* .back-to-map-button:hover { // Handled by .admin-button.secondary:hover
+  background-color: #2980b9;
+  transform: translateY(-1px);
+}
+.back-to-map-button:active{ // Handled by .admin-button:active
+  transform: translateY(0px);
+} */
+
+
+/* Carousel Styles */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+  background-color: #e9ecef;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.carousel-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+}
+
+.carousel-slide img,
+.carousel-slide video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--carousel-arrow-bg);
+  color: var(--carousel-arrow-color);
+  border: none;
+  font-size: 2.2rem;
+  padding: 8px 12px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: var(--border-radius);
+  opacity: 0.75;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.carousel-button:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.prev { left: 15px; }
+.carousel-button.next { right: 15px; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.carousel-dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+.carousel-dots .dot:hover { transform: scale(1.1); }
+.carousel-dots .dot.active {
+  background-color: var(--text-color-light);
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  /* .back-to-map-button { padding: 11px 22px; font-size: 1em; } Already handled by .admin-button responsive if any */
+  .project-detail-actions .back-to-map-button,
+  .project-detail-actions .whatsapp-inline-button {
+    min-width: 200px;
+    font-size: 1em; /* Adjust font size for smaller screens */
+  }
+  .carousel-button { font-size: 1.8rem; padding: 5px 10px; }
+  .carousel-dots .dot { width: 10px; height: 10px; }
+}
